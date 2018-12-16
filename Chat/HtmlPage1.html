@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script src="scripts/jquery-1.10.2.js"></script>
+    <script src="scripts/jquery.signalR-2.1.2.js"></script>
+    <script type="text/javascript">
+
+        ////链接成功的时候
+        //var proxy = $.connection.personHub;
+
+        ////这个方法是被 server 调用的
+        //proxy.client.Welcome = function (msg) {
+        //    console.log(msg);
+        //}
+
+        //$.connection.hub.start().done(function (data) {
+
+        //    proxy.server.hello();
+
+        //}).fail(function (data) {
+
+        //});
+
+        var conn = $.hubConnection("/myhub", { qs: "username=1111111111111111111111111111111111111111111111111111" });
+
+        //通过的代理类
+        var proxy = conn.createHubProxy("MyPersonHub");
+
+        //定义客户端方法
+        proxy.on("Welcome", function (msg) {
+            console.log(msg);
+        });
+
+        proxy.on('GetDate', function (msg) {
+            alert(msg);
+        })
+        conn.start().done(function (data) {
+            console.log(data);
+            proxy.invoke('GetDate')
+            //调用 server 端的方法
+            proxy.invoke("MyHello", 100).done(function (msg) {
+                console.log(msg);
+            }).fail(function (data) {
+                console.log(data);
+            });
+
+            
+
+        }).fail(function (data) {
+            alert(data)
+        });
+
+    </script>
+</body>
+</html>
