@@ -15,7 +15,7 @@ namespace WebApplication1
     [HubName("MyPersonHub")]
     public class PersonHub : Hub
     {
-        private static int OnlineCount = 0;
+        public static int OnlineCount = 0;
         public static ConcurrentDictionary<string, User> valuePairs = new ConcurrentDictionary<string, User>();
         public async Task GetDate()
         {
@@ -27,19 +27,45 @@ namespace WebApplication1
             string msgBody = JsonConvert.SerializeObject(data);
             await Clients.All.GetMsg(data);
         }
+
+        
         /*  在下面的三个方法中，我们可以用来维护 connectionID 列表  */
-        public override Task OnConnected()
+        public async override Task OnConnected()
         {
             //连接成功后写入cookie
             Interlocked.Increment(ref OnlineCount);
-            var user = new User
+           
+            
+            Cookie cookie;
+            if (!Context.RequestCookies.TryGetValue("aa", out cookie))
             {
-                Active = true,
-                Name = "user_" + OnlineCount,
-                OnlineTime = DateTime.Now
-            };
-            valuePairs[Context.ConnectionId] = user;
-            return base.OnConnected();
+                var guid = Guid.NewGuid().ToString();
+                System.Web.HttpContext.Current.Response.Cookies.Add(new HttpCookie("aa", guid));
+                var user = new User
+                {
+                    Active = true,
+                    Name = "user_" + OnlineCount,
+                    OnlineTime = DateTime.Now
+                };
+                valuePairs[cookie.Value] = user;
+                await Clients.All.OnlineUser(valuePairs[cookie.Value]);
+            }
+            else
+            {
+                User user;
+                if (!valuePairs.TryGetValue(cookie.Value,out user))
+                {
+                    valuePairs[cookie.Value] = new User
+                    {
+                        Active = true,
+                        Name = "user_" + OnlineCount,
+                        OnlineTime = DateTime.Now
+                    };
+                }
+                await Clients.All.OnlineUser(valuePairs[cookie.Value]);
+            }
+
+            await  base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -48,12 +74,21 @@ namespace WebApplication1
             return base.OnDisconnected(stopCalled);
         }
 
-        public override Task OnReconnected()
+        public async override Task OnReconnected()
         {
             Interlocked.Decrement(ref OnlineCount);
             User user;
-            valuePairs.TryRemove(Context.ConnectionId, out user);
-            return base.OnReconnected();
+            Cookie cookie;
+            if (Context.RequestCookies.TryGetValue("aa", out cookie))
+            {
+                if(valuePairs.TryRemove(cookie.Value, out user))
+                {
+                    user.Active = false;
+                    valuePairs.TryAdd(cookie.Value, user);
+                }
+            }
+            await Clients.Others.OnlineUser(valuePairs[cookie.Value]);
+          //  return base.OnReconnected();
         }
     }
 

@@ -391,13 +391,7 @@
                         </div>
                         <div class="chat03_content" id="chat03_content">
                                 <ul id="tplUl">
-                                    <!--<li>
-                                        <label class="offline">
-                                        </label>
-                                        <a href="javascript:;">
-                                            <img src="img/head/2014.jpg">
-                                        </a><a href="javascript:;" class="chat03_name">陈诚</a>
-                                    </li>-->
+                                  
 
                                 </ul>
                         </div>
@@ -419,7 +413,21 @@
         proxy.on('GetMsg', function (data) {
             $("#msgUl").append("<li>【" + data.Name + "】&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + data.msg + "&nbsp;&nbsp;" + data.date + "</li>");
         });
+        //返回服务端在线用户数量
+        proxy.on('OnlineUser', function (onlineCount) {
+            debugger;
+            var arr = [];
+            arr.push(onlineCount)
+            for (var i = 0; i < arr.length; i++) {
+                var li = "<li>";
+                li += "<label class='" + (arr[i].Active == true?"online":"offline") + "'></label>";
+                li += "<a href=\"javascript:;\"><img src=\"img/head/2014.jpg\"></a><a href=\"javascript:;\" class=\"chat03_name\">" + arr[i].Name + "</a>";
+                li+="</li>";
+                $("#tplUl").append(li);
+            }
+           
 
+        })
         
         conn.start().done(function (data) {
             $("#send").click(function () {
