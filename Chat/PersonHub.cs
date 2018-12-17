@@ -37,6 +37,7 @@ namespace WebApplication1
            
             
             Cookie cookie;
+
             if (!Context.RequestCookies.TryGetValue("aa", out cookie))
             {
                 var guid = Guid.NewGuid().ToString();
@@ -47,8 +48,8 @@ namespace WebApplication1
                     Name = "user_" + OnlineCount,
                     OnlineTime = DateTime.Now
                 };
-                valuePairs[cookie.Value] = user;
-                await Clients.All.OnlineUser(valuePairs[cookie.Value]);
+               valuePairs[guid] = user;
+               await Clients.All.OnlineUser(valuePairs[guid]);
             }
             else
             {
