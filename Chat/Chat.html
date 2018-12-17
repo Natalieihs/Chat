@@ -8,6 +8,7 @@
     <script src="scripts/jquery-1.10.2.js"></script>
     <script src="scripts/jquery.signalR-2.1.2.js"></script>
     <script src="scripts/chat.js"></script>
+    <script  src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body class="keBody">
     <div class="kePublic">
@@ -390,10 +391,17 @@
                             </label>
                         </div>
                         <div class="chat03_content" id="chat03_content">
-                                <ul id="tplUl">
-                                  
+                            <ul id="tplUl">
+                                <li v-for="site in sites">
+                                    <label class="offline">
+                                    </label>
+                                    <a href="javascript:;">
+                                        <img src="img/head/2016.jpg" />
+                                    </a><a href="javascript:;" class="chat03_name">{{site.Name}} </a>
+                                </li>
 
-                                </ul>
+
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -420,11 +428,28 @@
             var arr = [];
             arr.push(onlineCount)
             for (var i = 0; i < arr.length; i++) {
-                var li = "<li>";
-                li += "<label class='" + (arr[i].Active == true?"online":"offline") + "'></label>";
-                li += "<a href=\"javascript:;\"><img src=\"img/head/2014.jpg\"></a><a href=\"javascript:;\" class=\"chat03_name\">" + arr[i].Name + "</a>";
-                li+="</li>";
-                $("#tplUl").append(li);
+                new Vue({
+                    el: '#tplUl',
+                    data: {
+                        sites: arr
+                    }
+                })
+                //var li = "<li id='" + arr[i].Name+"'>";
+                //li += "<label class='" + (arr[i].Active == true?"online":"offline") + "'></label>";
+                //li += "<a href=\"javascript:;\"><img src=\"img/head/2014.jpg\"></a><a href=\"javascript:;\" class=\"chat03_name\">" + arr[i].Name + "</a>";
+                //li += "</li>";
+                //if ($("#tplUl").find("li").length > 0) {
+                //    for (var j = 0; j < $("#tplUl").find("li").length; j++) {
+                //        var temp = $("#tplUl").find("li").eq(j);
+                //        if (temp.attr("id") == arr[i].Name) {
+                //            continue;
+                //        } else {
+                //            $("#tplUl").append(li);
+                //        }
+                //    }
+                //} else {
+                //    $("#tplUl").append(li);
+                //}
             }
            
 

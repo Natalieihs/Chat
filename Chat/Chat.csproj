@@ -281,6 +281,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Help\IOHelper.cs" />
+    <Compile Include="Help\Sessions.cs" />
+    <Compile Include="Help\StringHelper.cs" />
+    <Compile Include="Help\TypeHelper.cs" />
+    <Compile Include="Help\ValidateHelper.cs" />
+    <Compile Include="Help\WebHelper.cs" />
     <Compile Include="PersonHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup1.cs" />
