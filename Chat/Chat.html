@@ -393,7 +393,10 @@
                         <div class="chat03_content" id="chat03_content">
                             <ul id="tplUl">
                                 <li v-for="site in sites">
+                                    {{#if ok}}
                                     <label class="offline">
+                                        {{/if}}
+                                        {{}}
                                     </label>
                                     <a href="javascript:;">
                                         <img src="img/head/2016.jpg" />
