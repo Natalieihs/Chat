@@ -8,9 +8,23 @@
     <title>LayIM测试</title>
     <script src="~/layui/layui.js"></script>
     <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
 </head>
 <body>
 <script>
+    var conn = $.hubConnection("/myhub", {
+        qs: "Bearer=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicHdkIjoiMTIzIn0.PfNy_3CgWZQPtXQHJ8KNUwunImKEz5jsj9LzZZg6GKg"
+    });
+    conn.url = "http://localhost:6178/myhub/signalr"
+    var proxy = conn.createHubProxy("MyPersonHub");
+    var proxy = conn.createHubProxy("MyPersonHub");
+    conn.start().done(function (data) {
+
+
+    }).fail(function (data) {
+        alert(data)
+    });
 layui.use('layim', function(layim){
   //先来个客服模式压压精
     layim.config({
@@ -68,7 +82,7 @@ layui.use('layim', function(layim){
     ,id: -2
         });
     layim.on('sendMessage', function (data) {
-        alert("1111")
+        
     })
 });
 </script>
