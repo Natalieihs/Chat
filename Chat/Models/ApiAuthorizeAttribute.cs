@@ -41,7 +41,7 @@ namespace Chat.Models
         public override bool AuthorizeHubMethodInvocation(IHubIncomingInvokerContext hubIncomingInvokerContext, bool appliesToMethod)
         {
             //return base.AuthorizeHubMethodInvocation(hubIncomingInvokerContext, appliesToMethod);
-            return false;
+            return true;
         }
         protected override bool UserAuthorized(IPrincipal user)
         {
