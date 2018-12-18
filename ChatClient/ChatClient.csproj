@@ -155,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Chat.html" />
+    <Content Include="chatlog.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -175,6 +176,7 @@
     <Content Include="layui\css\modules\layer\default\loading-2.gif" />
     <Content Include="layui\css\modules\layim\layim.css" />
     <Content Include="layui\font\iconfont.svg" />
+    <Content Include="layui\global.js" />
     <Content Include="layui\images\face\0.gif" />
     <Content Include="layui\images\face\1.gif" />
     <Content Include="layui\images\face\10.gif" />
