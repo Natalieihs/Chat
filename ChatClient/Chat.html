@@ -9,7 +9,7 @@
 <body>
     <script>
         var conn = $.hubConnection("/myhub", {
-            qs: "username=1111111111111111111111111111111111111111111111111111"
+            qs: "Bearer=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicHdkIjoiMTIzIn0.PfNy_3CgWZQPtXQHJ8KNUwunImKEz5jsj9LzZZg6GKg"
         });
         conn.url = "http://localhost:6178/myhub/signalr"
         var proxy = conn.createHubProxy("MyPersonHub");

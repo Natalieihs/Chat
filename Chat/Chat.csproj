@@ -170,6 +170,7 @@
     <Content Include="Chat.html" />
     <Content Include="css\chat.css" />
     <Content Include="css\site.css" />
+    <Content Include="db\Chat.sql" />
     <Content Include="images\bodyBg.jpg" />
     <Content Include="images\bodyBg2.jpg" />
     <Content Include="images\bodyBg3.jpg" />

@@ -1,31 +1,76 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿<!doctype html>
+@{ 
+    Layout = null;
 }
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>LayIM测试</title>
+    <script src="~/layui/layui.js"></script>
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+</head>
+<body>
+<script>
+layui.use('layim', function(layim){
+  //先来个客服模式压压精
+    layim.config({
+        //初始化接口
+        init: {
+            url: '/layim/json/getList.json'
+            , data: {}
+        }
+        //查看群员接口
+        , members: {
+            url: '/layim/json/getMembers.json'
+            , data: {}
+        }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+        , uploadImage: {
+            url: '' //（返回的数据格式见下文）
+            , type: '' //默认post
+        }
+        , uploadFile: {
+            url: '' //（返回的数据格式见下文）
+            , type: '' //默认post
+        }
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+        , isAudio: true //开启聊天工具栏音频
+        , isVideo: true //开启聊天工具栏视频
+
+        //扩展工具栏
+        , tool: [{
+            alias: 'code'
+            , title: '代码'
+            , icon: '&#xe64e;'
+        }]
+
+        //,brief: true //是否简约模式（若开启则不显示主面板）
+
+        //,title: 'WebIM' //自定义主面板最小化时的标题
+        //,right: '100px' //主面板相对浏览器右侧距离
+        //,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离
+        , initSkin: '3.jpg' //1-5 设置初始背景
+        //,skin: ['aaa.jpg'] //新增皮肤
+        //,isfriend: false //是否开启好友
+        //,isgroup: false //是否开启群组
+        //,min: true //是否始终最小化主面板，默认false
+        //,notice: true //是否开启桌面消息提醒，默认false
+        //,voice: false //声音提醒，默认开启，声音文件为：default.mp3
+
+        , msgbox: '/layim/demo/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
+        , find: '/layim/demo/find.html' //发现页面地址，若不开启，剔除该项即可
+        , chatLog: '/layim/demo/chatlog.html' //聊天记录页面地址，若不开启，剔除该项即可
+
+    }).chat({
+    name: '客服姐姐'
+    ,type: 'friend'
+    ,avatar: 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1'
+    ,id: -2
+        });
+    layim.on('sendMessage', function (data) {
+        alert("1111")
+    })
+});
+</script>
+</body>
+</html>
