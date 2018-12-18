@@ -208,3 +208,10 @@ D:\总后台\聊天室\Chat\Chat\bin\Microsoft.Owin.Cors.dll
 D:\总后台\聊天室\Chat\Chat\bin\System.Web.Cors.dll
 D:\总后台\聊天室\Chat\Chat\bin\Microsoft.Owin.Cors.xml
 D:\总后台\聊天室\Chat\Chat\obj\Debug\Chat.csprojAssemblyReference.cache
+D:\总后台\聊天室\Chat\Chat\bin\SqlSugar.dll
+D:\总后台\聊天室\Chat\Chat\bin\Newtonsoft.Json.pdb
+D:\总后台\聊天室\Chat\Chat\bin\JWT.dll
+D:\总后台\聊天室\Chat\Chat\bin\JWT.xml
+D:\总后台\聊天室\Chat\Chat\bin\System.Web.Optimization.dll
+D:\总后台\聊天室\Chat\Chat\bin\System.Web.Optimization.xml
+D:\总后台\聊天室\Chat\Chat\bin\zh-Hans\System.Web.Optimization.resources.dll

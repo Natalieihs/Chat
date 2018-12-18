@@ -26,7 +26,7 @@
 
         //});
 
-        var conn = $.hubConnection("/myhub", { qs: "username=1111111111111111111111111111111111111111111111111111" });
+        var conn = $.hubConnection("/myhub", { qs: "Bearer=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicHdkIjoiMTIzIn0.PfNy_3CgWZQPtXQHJ8KNUwunImKEz5jsj9LzZZg6GKg" });
 
         //通过的代理类
         var proxy = conn.createHubProxy("MyPersonHub");

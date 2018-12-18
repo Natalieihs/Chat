@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using Chat.Help;
+using Chat.Models;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ using Newtonsoft.Json;
 namespace WebApplication1
 {
 
+    [ApiAuthorize]
     [HubName("MyPersonHub")]
     public class PersonHub : Hub
     {
